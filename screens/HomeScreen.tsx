@@ -27,6 +27,8 @@ const HomeScreen = () => {
                     </View>
                 </View>
 
+                <View className="h-px bg-gray-200 mx-4"></View>
+
                 <View className="px-4 py-6">
                     <Text className="text-3xl font-bold">Hello, Sahil!</Text>
                     <Text className="text-gray-500 text-base mt-2">Here's your outfit for today</Text>
