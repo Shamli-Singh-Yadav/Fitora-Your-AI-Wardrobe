@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileScreen from '../screens/ProfileScreen';
+import FitaiScreen from '../screens/FitaiScreen';
+import WardrobeScreen from '../screens/WardrobeScreen';
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator()
@@ -33,6 +35,16 @@ const TabNavigator = () => {
             />
 
             <Tab.Screen 
+            name='FitAI' 
+            component={FitaiScreen}  
+            options= {{
+                tabBarIcon:({color,size}) => (
+                    <Ionicons name='sparkles' color={color} size={size} />
+                ), 
+            }}
+            />
+
+            <Tab.Screen 
             name='Add' 
             component={View}  
             options= {{
@@ -44,6 +56,16 @@ const TabNavigator = () => {
                 tabBarButton: (props) => (
                     <TouchableOpacity {...props}  className="items-center justify-center"/>
                 )
+            }}
+            />
+
+            <Tab.Screen 
+            name='Wardrobe' 
+            component={WardrobeScreen}  
+            options= {{
+                tabBarIcon:({color,size}) => (
+                    <Ionicons name='bag-outline' color={color} size={size} />
+                ), 
             }}
             />
 
