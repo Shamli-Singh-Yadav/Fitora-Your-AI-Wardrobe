@@ -1,88 +1,143 @@
-import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
 import { Ionicons } from '@expo/vector-icons';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from '../screens/HomeScreen';
 import FitaiScreen from '../screens/FitaiScreen';
 import WardrobeScreen from '../screens/WardrobeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import { Colors, Fonts } from '../constants/theme';
 
-const TabNavigator = () => {
-    const Tab = createBottomTabNavigator()
-    return (
-        <Tab.Navigator 
-        screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarActiveTintColor: "#000",
-            tabBarInactiveTintColor: "#D3D3D3",
-            tabBarStyle: {
-                backgroundColor:"#fff",
-                height: 70,
-                borderTopWidth: 0,
-                elevation: 0
-            },
-            }}>
+const Tab = createBottomTabNavigator();
 
-            <Tab.Screen 
-            name='Home' 
-            component={HomeScreen}  
-            options= {{
-                tabBarIcon:({color,size}) => (
-                    <Ionicons name='home' color={color} size={size} />
-                ), 
-            }}
-            />
+type TabIconProps = {
+  name: keyof typeof Ionicons.glyphMap;
+  focused: boolean;
+  label: string;
+};
 
-            <Tab.Screen 
-            name='FitAI' 
-            component={FitaiScreen}  
-            options= {{
-                tabBarIcon:({color,size}) => (
-                    <Ionicons name='sparkles' color={color} size={size} />
-                ), 
-            }}
-            />
+const TabIcon = ({ name, focused, label }: TabIconProps) => (
+  <View style={tabStyles.iconWrap}>
+    <Ionicons
+      name={focused ? name : `${name}-outline` as any}
+      size={22}
+      color={focused ? Colors.blue : Colors.textMuted}
+    />
+    <Text style={[tabStyles.label, focused && tabStyles.labelActive]}>{label}</Text>
+  </View>
+);
 
-            <Tab.Screen 
-            name='Add' 
-            component={View}  
-            options= {{
-                tabBarIcon:({}) => (
-                    <View className="w-12 h-12 rounded-full bg-black items-center justify-center">
-                        <Text className="text-white text-[28px] leading-[28px]">+</Text>
-                    </View>
-                ), 
-                tabBarButton: (props) => (
-                    <TouchableOpacity {...props}  className="items-center justify-center"/>
-                )
-            }}
-            />
+const CenterButton = ({ onPress }: { onPress?: () => void }) => (
+  <TouchableOpacity onPress={onPress} style={tabStyles.centerBtn} activeOpacity={0.85}>
+    <View style={tabStyles.centerBtnInner}>
+      <Ionicons name="add" size={28} color={Colors.white} />
+    </View>
+  </TouchableOpacity>
+);
 
-            <Tab.Screen 
-            name='Wardrobe' 
-            component={WardrobeScreen}  
-            options= {{
-                tabBarIcon:({color,size}) => (
-                    <Ionicons name='bag-outline' color={color} size={size} />
-                ), 
-            }}
-            />
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={{
+      headerShown: false,
+      tabBarShowLabel: false,
+      tabBarStyle: tabStyles.tabBar,
+    }}
+  >
+    <Tab.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <TabIcon name="home" focused={focused} label="Home" />
+        ),
+      }}
+    />
 
-            <Tab.Screen 
-            name='Profile' 
-            component={ProfileScreen}  
-            options= {{
-                tabBarIcon:({color,size}) => (
-                    <Ionicons name='person' color={color} size={size} />
-                ), 
-            }}
-            />
+    <Tab.Screen
+      name="FitAI"
+      component={FitaiScreen}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <TabIcon name="sparkles" focused={focused} label="FitAI" />
+        ),
+      }}
+    />
 
-            </Tab.Navigator>
-    )
-}
+    <Tab.Screen
+      name="AddItem"
+      component={WardrobeScreen}
+      options={{
+        tabBarIcon: () => null,
+        tabBarButton: (props) => <CenterButton onPress={props.onPress ?? undefined} />,
+      }}
+    />
+
+    <Tab.Screen
+      name="Wardrobe"
+      component={WardrobeScreen}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <TabIcon name="bag" focused={focused} label="Wardrobe" />
+        ),
+      }}
+    />
+
+    <Tab.Screen
+      name="Profile"
+      component={ProfileScreen}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <TabIcon name="person" focused={focused} label="Profile" />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
 
 export default TabNavigator;
 
-const styles = StyleSheet.create({})
+const tabStyles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: Colors.white,
+    height: Platform.OS === 'ios' ? 82 : 68,
+    borderTopWidth: 0,
+    elevation: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.07,
+    shadowRadius: 12,
+  },
+  iconWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 4,
+    gap: 3,
+  },
+  label: {
+    fontSize: 10,
+    color: Colors.textMuted,
+    fontWeight: Fonts.medium,
+    letterSpacing: 0.2,
+  },
+  labelActive: { color: Colors.blue },
+  centerBtn: {
+    bottom: 14,
+    width: 58,
+    height: 58,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  centerBtnInner: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    backgroundColor: Colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: Colors.blue,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+});
