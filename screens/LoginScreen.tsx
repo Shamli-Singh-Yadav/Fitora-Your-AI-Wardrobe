@@ -34,13 +34,14 @@ const LoginScreen = ({ navigation }: any) => {
           showsVerticalScrollIndicator={false}
         >
           {/* ── Logo ── */}
-          <View style={styles.logoSection}>
-            <View style={styles.logoIconWrap}>
-              <FitoraLogoMark size={52} />
+            <View className="flex-1 justify-center">
+                <View className="items-center mb-6">
+                    <Image
+                        source={require('../assets/logo1.svg')}
+                        style={{ width: 250, height: 250 }}
+                    />
+                </View>
             </View>
-            <Text style={styles.brand}>FITORA</Text>
-            <Text style={styles.tagline}>Your AI Wardrobe</Text>
-          </View>
 
           {/* ── Welcome ── */}
           <Text style={styles.welcome}>Welcome back</Text>
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   },
 
   // Logo
-  logoSection: { alignItems: 'center', marginBottom: Spacing.xxxl },
+  logoSection: { alignItems: 'center' },
   logoIconWrap: {
     width: 80,
     height: 80,
@@ -184,14 +185,14 @@ const styles = StyleSheet.create({
   },
 
   // Form
-  form: { gap: 14 },
+  form: { gap: 10 },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F2F2F7',
     borderRadius: Radius.full,
     paddingHorizontal: Spacing.lg,
-    paddingVertical: 14,
+    paddingVertical: 11,
     borderWidth: 1,
     borderColor: '#E5E5EA',
     gap: 10,

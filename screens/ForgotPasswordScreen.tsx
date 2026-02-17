@@ -54,9 +54,14 @@ const ForgotPasswordScreen = ({ navigation }: any) => {
 
           {/* Logo */}
           <View style={styles.logoSection}>
-            <View style={styles.logoIconWrap}>
-              <FitoraLogoMark size={44} />
-            </View>
+            <View className="flex-1 justify-center">
+                            <View className="items-center mb-6">
+                                <Image
+                                    source={require('../assets/logo1.svg')}
+                                    style={{ width: 250, height: 250 }}
+                                />
+                            </View>
+                        </View>
           </View>
 
           {/* Heading */}
@@ -147,11 +152,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F7',
     borderRadius: Radius.full,
     paddingHorizontal: Spacing.lg,
-    paddingVertical: 14,
+    paddingVertical: 11,
     borderWidth: 1,
     borderColor: '#E5E5EA',
     gap: 10,
-    marginBottom: 14,
+    marginBottom: 10,
   },
   input: { flex: 1, fontSize: 15, color: Colors.text },
   submitBtn: {

@@ -41,9 +41,14 @@ const SignupScreen = ({ navigation }: any) => {
 
           {/* Logo */}
           <View style={styles.logoSection}>
-            <View style={styles.logoIconWrap}>
-              <FitoraLogoMark size={52} />
-            </View>
+            <View className="flex-1 justify-center" >
+                            <View className="items-center mb-6">
+                                <Image
+                                    source={require('../assets/logo1.svg')}
+                                    style={{ width: 250, height: 250 }}
+                                />
+                            </View>
+                        </View>
           </View>
 
           <Text style={styles.heading}>Create account</Text>
@@ -150,20 +155,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   back: { marginBottom: Spacing.lg, width: 40 },
-  logoSection: { alignItems: 'center', marginBottom: Spacing.xl },
-  logoIconWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: 20,
-    backgroundColor: Colors.blueSoft,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: Colors.blue,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 3,
-  },
+  logoSection: { alignItems: 'center' },
   heading: {
     fontSize: 26,
     fontWeight: Fonts.bold,
@@ -175,14 +167,14 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     marginBottom: Spacing.xxl,
   },
-  form: { gap: 14 },
+  form: { gap: 10 },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F2F2F7',
     borderRadius: Radius.full,
     paddingHorizontal: Spacing.lg,
-    paddingVertical: 14,
+    paddingVertical: 11,
     borderWidth: 1,
     borderColor: '#E5E5EA',
     gap: 10,
