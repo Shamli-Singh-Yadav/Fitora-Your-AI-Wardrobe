@@ -30,7 +30,7 @@ const TabIcon = ({ name, focused, label }: TabIconProps) => (
 const CenterButton = ({ onPress }: { onPress?: () => void }) => (
   <TouchableOpacity onPress={onPress} style={tabStyles.centerBtn} activeOpacity={0.85}>
     <View style={tabStyles.centerBtnInner}>
-      <Ionicons name="add" size={28} color={Colors.white} />
+      <Ionicons name="add" size={28} color="white" />
     </View>
   </TouchableOpacity>
 );
@@ -121,9 +121,7 @@ const tabStyles = StyleSheet.create({
   },
   labelActive: { color: Colors.blue },
   centerBtn: {
-    bottom: 14,
-    width: 58,
-    height: 58,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

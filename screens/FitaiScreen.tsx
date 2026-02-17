@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -123,7 +124,10 @@ const FitaiScreen = ({ route, navigation }: any) => {
       <View style={[styles.msgRow, isAI ? styles.msgRowAI : styles.msgRowUser]}>
         {isAI && (
           <View style={styles.aiAvatar}>
-            <FitoraLogoMark size={16} />
+            <Image
+              source={require('../assets/logo.svg')}
+              style={{ width: 30, height: 30}}
+            />
           </View>
         )}
         <View style={[styles.bubble, isAI ? styles.bubbleAI : styles.bubbleUser]}>
@@ -140,7 +144,10 @@ const FitaiScreen = ({ route, navigation }: any) => {
       {/* ── Chat Header ── */}
       <View style={styles.header}>
         <View style={styles.aiAvatarLg}>
-          <FitoraLogoMark size={20} />
+          <Image
+            source={require('../assets/logo.svg')}
+            style={{ width: 50, height: 50 }}
+          />
         </View>
         <View style={styles.headerInfo}>
           <Text style={styles.headerName}>FitAI 5.2</Text>
@@ -182,7 +189,10 @@ const FitaiScreen = ({ route, navigation }: any) => {
             isTyping ? (
               <View style={styles.msgRow}>
                 <View style={styles.aiAvatar}>
-                  <FitoraLogoMark size={16} />
+                  <Image
+                    source={require('../assets/logo.svg')}
+                    style={{ width: 28, height: 28 }}
+                  />
                 </View>
                 <Animated.View style={[styles.bubble, styles.bubbleAI, { opacity: typingOpacity }]}>
                   <Text style={[styles.bubbleText, styles.bubbleTextAI]}>  ● ● ●  </Text>
